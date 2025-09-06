@@ -10,7 +10,14 @@
 <body>
   <header>
     <h1>College Football Pick'em Tracker</h1>
-    <button id="simulateBtn">Simulate Game Results</button>
+    <div class="header-actions">
+      <button id="simulateBtn">Simulate Game Results</button>
+      <button id="exportBtn" title="Download a backup of your picks">Export</button>
+      <label class="import-label">
+        Import
+        <input type="file" id="importInput" accept=".json" hidden />
+      </label>
+    </div>
   </header>
 
   <main>
@@ -52,9 +59,17 @@
   </main>
 
   <footer>
-    <small>Local practice only. Nothing here is real gambling.</small>
+    <small>Local practice only. Nothing here is real gambling. Works offline; your data stays in your browser.</small>
   </footer>
 
   <script src="app.js"></script>
+  <script>
+    // Service worker for offline support
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').catch(() => {});
+      });
+    }
+  </script>
 </body>
 </html>

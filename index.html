@@ -20,7 +20,22 @@
     </div>
   </header>
 
-  <main>
+  <!-- NEW: Instructions dropdown -->
+  <section class="container">
+    <details class="howto" open>
+      <summary>How this works (click to toggle)</summary>
+      <ol>
+        <li><strong>Weekly games:</strong> edit <code>data/games.txt</code> (format: <code>Team A vs. Team B (+spread, O/U)</code>) and push. GitHub Action regenerates <code>public/games.json</code>.</li>
+        <li><strong>Make picks:</strong> on each card, click the team button. You’ll see a gold highlight + “Selected: Team” badge. Enter a fake bet (e.g., 10) and hit <strong>Lock</strong>.</li>
+        <li><strong>Settle results:</strong> type the final scores in the two score boxes and hit <strong>Settle</strong>. We grade ATS (add your spread to your picked team’s score).</li>
+        <li><strong>Stats:</strong> right panel shows record (W-L-P), net profit, chart of bankroll over time, and a sortable history.</li>
+        <li><strong>Offline + backups:</strong> site works offline (service worker). Your data stays in your browser (<code>localStorage</code>). Use <strong>Export</strong>/<strong>Import</strong> for backups.</li>
+        <li><strong>Notes:</strong> odds are even-money for v1 (win +bet / loss −bet / push 0). We can switch to −110 vig if you want.</li>
+      </ol>
+    </details>
+  </section>
+
+  <main class="container">
     <section class="games">
       <h2>This Week's Games</h2>
       <div id="gameList" class="game-list"></div>
@@ -58,13 +73,12 @@
     </aside>
   </main>
 
-  <footer>
+  <footer class="container">
     <small>Local practice only. Nothing here is real gambling. Works offline; your data stays in your browser.</small>
   </footer>
 
   <script src="app.js"></script>
   <script>
-    // Service worker for offline support
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('./sw.js').catch(() => {});

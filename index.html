@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>College Football Pick'em Tracker</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <header>
+    <h1>College Football Pick'em Tracker</h1>
+    <button id="simulateBtn">Simulate Game Results</button>
+  </header>
+
+  <main>
+    <section class="games">
+      <h2>This Week's Games</h2>
+      <div id="gameList" class="game-list"></div>
+    </section>
+
+    <aside class="sidebar">
+      <div class="stats-card">
+        <h3>Your Stats</h3>
+        <div class="stat-line"><span>Record (W-L-P)</span><strong id="record">0-0-0</strong></div>
+        <div class="stat-line"><span>Net Profit</span><strong id="profit">+$0.00</strong></div>
+      </div>
+
+      <div class="chart-card">
+        <h3>Profit Over Time</h3>
+        <canvas id="profitChart" height="180"></canvas>
+      </div>
+
+      <div class="history-card">
+        <h3>Picks History</h3>
+        <table id="historyTable">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Pick</th>
+              <th>Bet</th>
+              <th>Line</th>
+              <th>O/U</th>
+              <th>Result</th>
+              <th>Profit</th>
+            </tr>
+          </thead>
+          <tbody id="historyBody"></tbody>
+        </table>
+      </div>
+    </aside>
+  </main>
+
+  <footer>
+    <small>Local practice only. Nothing here is real gambling.</small>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

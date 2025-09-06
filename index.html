@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>College Football Pick'em Tracker</title>
 
-  <link rel="stylesheet" href="styles.css?v=3" />
+  <link rel="stylesheet" href="styles.css?v=4" />
   <link rel="icon" href="favicon.png" type="image/png" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
@@ -13,7 +13,6 @@
   <header>
     <h1>College Football Pick'em Tracker</h1>
     <div class="header-actions">
-      <!-- Collapsible dropdown -->
       <div class="dropdown" id="howto">
         <button id="howtoBtn" aria-expanded="false">Instructions ▾</button>
         <div class="dropdown-menu" id="howtoMenu" role="menu" aria-hidden="true">
@@ -56,8 +55,14 @@
     <aside class="sidebar">
       <div class="stats-card">
         <h3>Your Stats</h3>
-        <div class="stat-line"><span>Record (W-L-P)</span><strong id="record">0-0-0</strong></div>
-        <div class="stat-line"><span>Net Profit</span><strong id="profit">+$0.00</strong></div>
+        <div class="stat-line">
+          <span>Record (W-L-P)</span>
+          <strong id="record">0-0-0</strong>
+        </div>
+        <div class="stat-line">
+          <span>Net Profit</span>
+          <strong id="profit">+$0.00</strong>
+        </div>
       </div>
 
       <div class="chart-card">
@@ -80,9 +85,9 @@
   </main>
 
   <footer class="container">
-     </footer>
+  </footer>
 
-  <script src="app.js?v=3"></script>
+  <script src="app.js?v=4"></script>
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {

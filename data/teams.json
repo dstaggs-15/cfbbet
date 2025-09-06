@@ -1,0 +1,12 @@
+{
+  "Illinois": { "abbr": "ILL", "primary": "#E84A27", "secondary": "#13294B" },
+  "Duke": { "abbr": "DUKE", "primary": "#012169", "secondary": "#FFFFFF" },
+  "Iowa": { "abbr": "IOWA", "primary": "#000000", "secondary": "#FFCD00" },
+  "Iowa State": { "abbr": "ISU", "primary": "#C8102E", "secondary": "#F1BE48" },
+  "Texas": { "abbr": "TEX", "primary": "#BF5700", "secondary": "#FFFFFF" },
+  "Oklahoma": { "abbr": "OU", "primary": "#841617", "secondary": "#FFFFFF" },
+  "LSU": { "abbr": "LSU", "primary": "#461D7C", "secondary": "#FDD023" },
+  "Alabama": { "abbr": "ALA", "primary": "#9E1B32", "secondary": "#FFFFFF" },
+  "Ohio State": { "abbr": "OSU", "primary": "#BB0000", "secondary": "#666666" },
+  "Michigan": { "abbr": "MICH", "primary": "#00274C", "secondary": "#FFCB05" }
+}

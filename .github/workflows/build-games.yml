@@ -1,0 +1,58 @@
+name: Build games.json
+
+on:
+  push:
+    paths:
+      - 'data/games.txt'
+      - 'data/teams.json'
+      - 'scripts/parse_games.py'
+  workflow_dispatch: {}  # allow manual runs from the Actions tab
+  # Optional: run every Friday morning (adjust cron as you like)
+  # schedule:
+  #   - cron: '0 12 * * FRI'
+
+permissions:
+  contents: write  # needed to push the updated games.json back to the repo
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true  # use GITHUB_TOKEN for push
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      # If you ever add dependencies inside scripts/, install them here
+      # - name: Install deps
+      #   run: pip install -r requirements.txt
+
+      - name: Run parser
+        run: |
+          python3 scripts/parse_games.py
+
+      - name: Commit and push changes (if any)
+        run: |
+          # Only commit if public/games.json actually changed
+          if [[ -n "$(git status --porcelain public/games.json)" ]]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add public/games.json
+            git commit -m "chore: auto-build public/games.json [skip ci]"
+            git push
+          else
+            echo "No changes to commit."
+          fi
+
+      - name: Upload artifact (optional)
+        uses: actions/upload-artifact@v4
+        with:
+          name: games-json
+          path: public/games.json

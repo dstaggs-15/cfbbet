@@ -1,34 +1,97 @@
-<header>
-  <h1>College Football Pick'em Tracker</h1>
-  <div class="header-actions">
-    <div class="dropdown" id="howto">
-      <button id="howtoBtn" aria-expanded="false">Instructions ▾</button>
-      <div class="dropdown-menu" id="howtoMenu" role="menu" aria-hidden="true">
-        <ol>
-          <li><strong>Weekly games:</strong> edit <code>data/games.txt</code> (format:
-            <code>Team A vs. Team B (+spread, O/U)</code>) and push. The Action rebuilds
-            <code>public/games.json</code>.
-          </li>
-          <li><strong>Make picks:</strong> click a team. You’ll see a gold highlight + “Selected: Team”
-            badge. Enter a fake bet (e.g., 10) and hit <strong>Lock</strong>.
-          </li>
-          <li><strong>Settle results:</strong> enter the two final scores and hit <strong>Settle</strong>.
-            We grade ATS (picked team score + spread vs opponent).
-          </li>
-          <li><strong>Stats:</strong> right panel shows W-L-P, net profit, profit chart, and history.</li>
-          <li><strong>Offline + backups:</strong> works offline; data lives in your browser.
-            Use <strong>Export</strong>/<strong>Import</strong> for backups.
-          </li>
-          <li><strong>Note:</strong> v1 pays even money (win +bet / loss −bet / push 0). We can change to −110 vig on request.</li>
-        </ol>
-      </div>
-    </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>College Football Pick'em Tracker</title>
 
-    <button id="simulateBtn">Simulate Game Results</button>
-    <button id="exportBtn" title="Download a backup of your picks">Export</button>
-    <label class="import-label">
-      Import
-      <input type="file" id="importInput" accept=".json" hidden />
-    </label>
-  </div>
-</header>
+  <!-- CSS must be in the SAME folder as this file -->
+  <link rel="stylesheet" href="styles.css?v=1" />
+  <link rel="icon" href="favicon.png" type="image/png" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <header>
+    <h1>College Football Pick'em Tracker</h1>
+    <div class="header-actions">
+      <!-- Collapsible dropdown -->
+      <div class="dropdown" id="howto">
+        <button id="howtoBtn" aria-expanded="false">Instructions ▾</button>
+        <div class="dropdown-menu" id="howtoMenu" role="menu" aria-hidden="true">
+          <ol>
+            <li><strong>Weekly games:</strong> edit <code>data/games.txt</code> (format:
+              <code>Team A vs. Team B (+spread, O/U)</code>) and push. The Action rebuilds
+              <code>public/games.json</code>.
+            </li>
+            <li><strong>Make picks:</strong> click a team (gold highlight + “Selected:” badge).
+              Enter a fake bet (e.g., 10) and hit <strong>Lock</strong>.
+            </li>
+            <li><strong>Settle results:</strong> enter both final scores and hit <strong>Settle</strong>.
+              We grade ATS (picked team score + spread vs opponent).
+            </li>
+            <li><strong>Stats:</strong> right panel shows W-L-P, net profit, profit chart, and history.</li>
+            <li><strong>Offline + backups:</strong> works offline; data stays in your browser.
+              Use <strong>Export</strong>/<strong>Import</strong> for backups.
+            </li>
+            <li><strong>Note:</strong> v1 is even money (win +bet / loss −bet / push 0). We can switch to −110 vig.</li>
+          </ol>
+        </div>
+      </div>
+
+      <button id="simulateBtn">Simulate Game Results</button>
+      <button id="exportBtn" title="Download a backup of your picks">Export</button>
+      <label class="import-label">
+        Import
+        <input type="file" id="importInput" accept=".json" hidden />
+      </label>
+    </div>
+  </header>
+
+  <!-- Main content AREA (must exist for layout) -->
+  <main class="container">
+    <section class="games">
+      <h2>This Week's Games</h2>
+      <div id="gameList" class="game-list"></div>
+    </section>
+
+    <aside class="sidebar">
+      <div class="stats-card">
+        <h3>Your Stats</h3>
+        <div class="stat-line"><span>Record (W-L-P)</span><strong id="record">0-0-0</strong></div>
+        <div class="stat-line"><span>Net Profit</span><strong id="profit">+$0.00</strong></div>
+      </div>
+
+      <div class="chart-card">
+        <h3>Profit Over Time</h3>
+        <canvas id="profitChart" height="180"></canvas>
+      </div>
+
+      <div class="history-card">
+        <h3>Picks History</h3>
+        <table id="historyTable">
+          <thead>
+            <tr>
+              <th>Date</th><th>Pick</th><th>Bet</th><th>Line</th><th>O/U</th><th>Result</th><th>Profit</th>
+            </tr>
+          </thead>
+          <tbody id="historyBody"></tbody>
+        </table>
+      </div>
+    </aside>
+  </main>
+
+  <footer class="container">
+    <small>Local practice only. Nothing here is real gambling. Works offline; your data stays in your browser.</small>
+  </footer>
+
+  <!-- JS must be AFTER the HTML so elements exist -->
+  <script src="app.js?v=1"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').catch(() => {});
+      });
+    }
+  </script>
+</body>
+</html>

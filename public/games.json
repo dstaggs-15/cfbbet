@@ -1,0 +1,227 @@
+[
+  {
+    "team1": "Illinois",
+    "team2": "Duke",
+    "spread_team1": 2.5,
+    "spread_team2": -2.5,
+    "over_under": 49.5,
+    "team1_colors": {
+      "primary": "#13294B",
+      "secondary": "#E84A27"
+    },
+    "team2_colors": {
+      "primary": "#0736A4",
+      "secondary": "#FFFFFF"
+    }
+  },
+  {
+    "team1": "Iowa",
+    "team2": "Iowa State",
+    "spread_team1": -3.5,
+    "spread_team2": 3.5,
+    "over_under": 42.5,
+    "team1_colors": {
+      "primary": "#FFCD00",
+      "secondary": "#000000"
+    },
+    "team2_colors": {
+      "primary": "#C8102E",
+      "secondary": "#F1BE48"
+    }
+  },
+  {
+    "team1": "Virginia",
+    "team2": "NC State",
+    "spread_team1": -3.0,
+    "spread_team2": 3.0,
+    "over_under": 5.54,
+    "team1_colors": {
+      "primary": "#002244",
+      "secondary": "#F84C1E"
+    },
+    "team2_colors": {
+      "primary": "#CC0000",
+      "secondary": "#000000"
+    }
+  },
+  {
+    "team1": "Texas",
+    "team2": "San Jose State",
+    "spread_team1": 37.0,
+    "spread_team2": -37.0,
+    "over_under": 52.5,
+    "team1_colors": {
+      "primary": "#BF5700",
+      "secondary": "#333f48"
+    },
+    "team2_colors": {
+      "primary": "#222",
+      "secondary": "#ddd"
+    }
+  },
+  {
+    "team1": "Clemson",
+    "team2": "Troy",
+    "spread_team1": 31.5,
+    "spread_team2": -31.5,
+    "over_under": 51.5,
+    "team1_colors": {
+      "primary": "#F56600",
+      "secondary": "#522D80"
+    },
+    "team2_colors": {
+      "primary": "#98002E",
+      "secondary": "#828A8F"
+    }
+  },
+  {
+    "team1": "Ole Miss",
+    "team2": "Kentucky",
+    "spread_team1": 9.5,
+    "spread_team2": -9.5,
+    "over_under": 50.5,
+    "team1_colors": {
+      "primary": "#002147",
+      "secondary": "#d7112c"
+    },
+    "team2_colors": {
+      "primary": "#0033A0",
+      "secondary": "#FFFFFF"
+    }
+  },
+  {
+    "team1": "Oregon",
+    "team2": "Oklahoma State",
+    "spread_team1": 28.5,
+    "spread_team2": -28.5,
+    "over_under": 55.5,
+    "team1_colors": {
+      "primary": "#154733",
+      "secondary": "#FEE123"
+    },
+    "team2_colors": {
+      "primary": "#FF7300",
+      "secondary": "#000000"
+    }
+  },
+  {
+    "team1": "Florida",
+    "team2": "South Florida",
+    "spread_team1": 17.5,
+    "spread_team2": -17.5,
+    "over_under": 57.0,
+    "team1_colors": {
+      "primary": "#0021A5",
+      "secondary": "#FA4616"
+    },
+    "team2_colors": {
+      "primary": "#006747",
+      "secondary": "#CFC493"
+    }
+  },
+  {
+    "team1": "Kansas State",
+    "team2": "Army",
+    "spread_team1": 17.0,
+    "spread_team2": -17.0,
+    "over_under": 47.5,
+    "team1_colors": {
+      "primary": "#512888",
+      "secondary": "#FFFFFF"
+    },
+    "team2_colors": {
+      "primary": "#000000",
+      "secondary": "#d4bf91"
+    }
+  },
+  {
+    "team1": "LSU",
+    "team2": "Louisiana Tech",
+    "spread_team1": 37.5,
+    "spread_team2": -37.5,
+    "over_under": 51.5,
+    "team1_colors": {
+      "primary": "#461D7C",
+      "secondary": "#FDD023"
+    },
+    "team2_colors": {
+      "primary": "#002d72",
+      "secondary": "#d31145"
+    }
+  },
+  {
+    "team1": "Vanderbilt",
+    "team2": "Virginia Tech",
+    "spread_team1": -2.5,
+    "spread_team2": 2.5,
+    "over_under": 44.5,
+    "team1_colors": {
+      "primary": "#AE9142",
+      "secondary": "#000000"
+    },
+    "team2_colors": {
+      "primary": "#630031",
+      "secondary": "#CF4420"
+    }
+  },
+  {
+    "team1": "Arizona State",
+    "team2": "Mississippi State",
+    "spread_team1": 6.5,
+    "spread_team2": -6.5,
+    "over_under": 58.5,
+    "team1_colors": {
+      "primary": "#8C1D40",
+      "secondary": "#FFC627"
+    },
+    "team2_colors": {
+      "primary": "#660000",
+      "secondary": "#C8C372"
+    }
+  },
+  {
+    "team1": "Michigan",
+    "team2": "Oklahoma",
+    "spread_team1": -5.5,
+    "spread_team2": 5.5,
+    "over_under": 44.0,
+    "team1_colors": {
+      "primary": "#00274c",
+      "secondary": "#ffcb05"
+    },
+    "team2_colors": {
+      "primary": "#841617",
+      "secondary": "#FDF9D8"
+    }
+  },
+  {
+    "team1": "USC",
+    "team2": "Georgia Southern",
+    "spread_team1": 28.5,
+    "spread_team2": -28.5,
+    "over_under": 61.0,
+    "team1_colors": {
+      "primary": "#990000",
+      "secondary": "#FFC72C"
+    },
+    "team2_colors": {
+      "primary": "#003976",
+      "secondary": "#BDBDBA"
+    }
+  },
+  {
+    "team1": "Alabama",
+    "team2": "UL Monroe",
+    "spread_team1": 35.5,
+    "spread_team2": -35.5,
+    "over_under": 50.5,
+    "team1_colors": {
+      "primary": "#9e1b32",
+      "secondary": "#828A8F"
+    },
+    "team2_colors": {
+      "primary": "#222",
+      "secondary": "#ddd"
+    }
+  }
+]

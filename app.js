@@ -154,4 +154,157 @@ function gameCard(g, idx) {
 
   controls.append(pickBtn1, pickBtn2, selectedBadge, amount, lock, settleGroup);
 
-  card.append
+  card.append(t1, mid, t2, controls);
+  return card;
+}
+
+// ---- Settle logic ----
+function settleGame(game, team1Score, team2Score) {
+  let changed = false;
+  picks = picks.map(pk => {
+    const sameGame =
+      ((pk.team1 === game.team1 && pk.team2 === game.team2) ||
+       (pk.team1 === game.team2 && pk.team2 === game.team1));
+
+    if (!sameGame || pk.status !== "pending") return pk;
+
+    const pickedTeam1 = pk.teamPicked === game.team1;
+    const spread = pk.spreadPicked;
+
+    const pickedScore = pickedTeam1 ? team1Score : team2Score;
+    const otherScore  = pickedTeam1 ? team2Score : team1Score;
+    const adj = pickedScore + spread;
+
+    if (adj > otherScore)      { pk.status = "win";  pk.profit = pk.amount; }
+    else if (adj < otherScore) { pk.status = "loss"; pk.profit = -pk.amount; }
+    else                       { pk.status = "push"; pk.profit = 0; }
+
+    changed = true;
+    return pk;
+  });
+
+  if (changed) { savePicks(); refreshStats(); }
+  else { alert("No pending picks found for this matchup."); }
+}
+
+// ---- Stats, History, Chart ----
+function refreshStats() {
+  const w = picks.filter(p => p.status === "win").length;
+  const l = picks.filter(p => p.status === "loss").length;
+  const p = picks.filter(p => p.status === "push").length;
+  byId("record").textContent = `${w}-${l}-${p}`;
+
+  const net = picks.reduce((s, x) => s + (x.profit || 0), 0);
+  byId("profit").textContent = (net >= 0 ? "+" : "") + `$${net.toFixed(2)}`;
+
+  const body = byId("historyBody");
+  body.innerHTML = "";
+  picks.forEach(pk => {
+    const tr = document.createElement("tr");
+    const fmtDate = new Date(pk.when).toLocaleString();
+    tr.append(
+      td(fmtDate),
+      td(`${pk.teamPicked}`),
+      td(`$${pk.amount}`),
+      td(pk.spreadPicked > 0 ? `+${pk.spreadPicked}` : `${pk.spreadPicked}`),
+      td(pk.overUnder?.toFixed ? pk.overUnder.toFixed(1) : "-"),
+      td(statusLabel(pk.status)),
+      td((pk.profit >= 0 ? "+" : "") + `$${pk.profit.toFixed(2)}`)
+    );
+    body.appendChild(tr);
+  });
+
+  if (chart) {
+    const labels = [];
+    const data = [];
+    let run = 0;
+    const chronological = [...picks].reverse();
+    chronological.forEach(pk => {
+      run += (pk.profit || 0);
+      labels.push(new Date(pk.when).toLocaleDateString());
+      data.push(Number(run.toFixed(2)));
+    });
+    chart.data.labels = labels;
+    chart.data.datasets[0].data = data;
+    chart.update();
+  }
+}
+
+function setupChart() {
+  const ctx = byId("profitChart");
+  chart = new Chart(ctx, {
+    type: "line",
+    data: {
+      labels: [],
+      datasets: [{ label: "Net Profit ($)", data: [], borderWidth: 2, tension: 0.25 }]
+    },
+    options: {
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { ticks: { color: "#9aa0b4" }, grid: { display: false } },
+        y: { ticks: { color: "#9aa0b4" }, grid: { color: "#262a40" } }
+      }
+    }
+  });
+}
+
+// ---- Simulation ----
+function simulateResults() {
+  if (!picks.some(pk => pk.status === "pending")) return alert("No pending picks to settle.");
+  picks = picks.map(pk => {
+    if (pk.status !== "pending") return pk;
+    const covered = Math.random() < 0.5;
+    if (covered) { pk.status = "win";  pk.profit = pk.amount; }
+    else {
+      if (Math.random() < 0.05) { pk.status = "push"; pk.profit = 0; }
+      else { pk.status = "loss"; pk.profit = -pk.amount; }
+    }
+    return pk;
+  });
+  savePicks(); refreshStats();
+}
+
+// ---- Export / Import ----
+function exportPicks() {
+  const blob = new Blob([JSON.stringify(picks, null, 2)], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = `picks-backup-${new Date().toISOString().slice(0,10)}.json`;
+  document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+}
+function importPicks(ev) {
+  const file = ev.target.files?.[0]; if (!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    try {
+      const arr = JSON.parse(reader.result);
+      if (!Array.isArray(arr)) throw new Error("Invalid file");
+      picks = arr; savePicks(); refreshStats(); alert("Import complete.");
+    } catch { alert("Invalid JSON file."); }
+  };
+  reader.readAsText(file);
+}
+
+// ---- Helpers ----
+function el(tag, cls, text) { const x = document.createElement(tag); if (cls) x.className = cls; if (text !== undefined) x.textContent = text; return x; }
+function td(text) { const x = document.createElement("td"); x.textContent = text; return x; }
+function statusLabel(s) { if (s === "win") return "Win"; if (s === "loss") return "Loss"; if (s === "push") return "Push"; return "Pending"; }
+function byId(id) { return document.getElementById(id); }
+
+// ---- Dropdown instructions ----
+function setupHowToDropdown() {
+  const btn = byId("howtoBtn"); const menu = byId("howtoMenu");
+  if (!btn || !menu) return;
+  const KEY = "howto_open_v1";
+  const saved = localStorage.getItem(KEY);
+  const setOpen = (open) => {
+    btn.setAttribute("aria-expanded", String(open));
+    menu.classList.toggle("open", open);
+    menu.setAttribute("aria-hidden", String(!open));
+    localStorage.setItem(KEY, open ? "1" : "0");
+  };
+  setOpen(saved === "1");
+  btn.addEventListener("click", (e) => { e.stopPropagation(); setOpen(btn.getAttribute("aria-expanded") !== "true"); });
+  document.addEventListener("click", (e) => { if (!menu.classList.contains("open")) return; if (!menu.contains(e.target) && e.target !== btn) setOpen(false); });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") setOpen(false); });
+}

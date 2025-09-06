@@ -1,3 +1,58 @@
+:root {
+  --bg: #0f1220;
+  --card: #171a2b;
+  --muted: #9aa0b4;
+  --text: #f3f5ff;
+  --accent: #6ea8fe;
+  --green: #29c36a;
+  --red: #ff5466;
+  --border: #262a40;
+  --gold: #ffd666;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+}
+h1 { margin: 0; font-size: 24px; }
+.header-actions { display: flex; gap: 10px; align-items: center; }
+header button, .lock-btn, .settle-btn {
+  background: var(--accent);
+  color: #03102b;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+}
+header button:hover, .lock-btn:hover, .settle-btn:hover { filter: brightness(1.05); }
+.import-label {
+  background: var(--accent);
+  color: #03102b;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
 /* Dropdown */
 .dropdown { position: relative; }
 #howtoBtn {
@@ -10,7 +65,6 @@
   cursor: pointer;
 }
 #howtoBtn[aria-expanded="true"] { filter: brightness(1.05); }
-
 .dropdown-menu {
   position: absolute;
   right: 0;
@@ -27,3 +81,70 @@
 .dropdown-menu.open { display: block; }
 .dropdown-menu ol { margin: 0 0 0 18px; color: var(--muted); }
 .dropdown-menu code { color: #c6e2ff; }
+
+main.container {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  gap: 20px;
+  padding: 20px 16px;
+}
+
+.games h2 { margin: 0 0 10px 0; }
+.game-list { display: grid; gap: 14px; }
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 14px;
+  display: grid;
+  grid-template-columns: 1fr 80px 1fr;
+  gap: 12px;
+  align-items: center;
+}
+.team {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 12px;
+  color: #fff;
+  position: relative;
+}
+.team .name { font-weight: 800; }
+.team .line { opacity: .9; }
+
+.pick-btn {
+  border: 2px solid transparent;
+  padding: 8px 10px;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  background: #0d1120;
+  color: var(--text);
+  transition: transform .06s ease, box-shadow .06s ease, border-color .06s ease;
+}
+.pick-btn:hover { transform: translateY(-1px); }
+.pick-btn.selected {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 2px rgba(255, 214, 102, .25) inset, 0 0 12px rgba(255, 214, 102, .2);
+}
+.selected-badge {
+  font-size: 12px;
+  font-weight: 800;
+  color: #1f1200;
+  background: var(--gold);
+  padding: 3px 7px;
+  border-radius: 999px;
+  margin-left: 8px;
+}
+
+.vs { text-align: center; color: var(--muted); font-weight: 700; }
+
+.controls {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-top: 8px;
+  flex-wrap:

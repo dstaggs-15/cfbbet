@@ -5,8 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>College Football Pick'em Tracker</title>
 
-  <!-- CSS must be in the SAME folder as this file -->
-  <link rel="stylesheet" href="styles.css?v=1" />
+  <link rel="stylesheet" href="styles.css?v=3" />
   <link rel="icon" href="favicon.png" type="image/png" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
@@ -47,11 +46,11 @@
     </div>
   </header>
 
-  <!-- Main content AREA (must exist for layout) -->
   <main class="container">
     <section class="games">
       <h2>This Week's Games</h2>
       <div id="gameList" class="game-list"></div>
+      <div id="gamesError" class="error" style="display:none;"></div>
     </section>
 
     <aside class="sidebar">
@@ -84,8 +83,7 @@
     <small>Local practice only. Nothing here is real gambling. Works offline; your data stays in your browser.</small>
   </footer>
 
-  <!-- JS must be AFTER the HTML so elements exist -->
-  <script src="app.js?v=1"></script>
+  <script src="app.js?v=3"></script>
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {

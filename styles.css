@@ -15,6 +15,15 @@ body {
   margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   background: var(--bg); color: var(--text);
 }
+
+/* NEW: a centered container to prevent cut-offs and give breathing room */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
 header {
   display: flex; justify-content: space-between; align-items: center;
   padding: 16px 20px; border-bottom: 1px solid var(--border);
@@ -26,14 +35,34 @@ header button, .lock-btn, .settle-btn {
   border-radius: 10px; font-weight: 700; cursor: pointer;
 }
 header button:hover, .lock-btn:hover, .settle-btn:hover { filter: brightness(1.05); }
-
 .import-label {
   background: var(--accent); color: #03102b; padding: 10px 14px; border-radius: 10px; font-weight: 700; cursor: pointer;
 }
 
-main {
-  display: grid; grid-template-columns: 1fr 360px; gap: 20px; padding: 20px;
+/* NEW: instructions dropdown styling */
+.howto {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px 14px;
+  margin: 14px 0 0 0;
 }
+.howto > summary {
+  cursor: pointer; font-weight: 800;
+  list-style: none; /* remove default marker */
+}
+.howto > summary::-webkit-details-marker { display: none; }
+.howto[open] > summary { margin-bottom: 8px; }
+.howto ol { margin: 0 0 0 18px; color: var(--muted); }
+.howto code { color: #c6e2ff; }
+
+main.container {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 360px; /* minmax prevents content overflow */
+  gap: 20px;
+  padding: 20px 16px;
+}
+
 .games h2 { margin: 0 0 10px 0; }
 .game-list { display: grid; gap: 14px; }
 
@@ -48,7 +77,6 @@ main {
 .team .name { font-weight: 800; }
 .team .line { opacity: .9; }
 
-/* selection feedback */
 .pick-btn {
   border: 2px solid transparent; padding: 8px 10px; border-radius: 10px; font-weight: 700; cursor: pointer;
   background: #0d1120; color: var(--text);
@@ -73,12 +101,11 @@ main {
 }
 .amount { width: 100px; }
 .score { width: 80px; }
-
 .lock-btn { margin-left: auto; }
 .settle-group { display: flex; align-items: center; gap: 8px; margin-left: auto; }
 .settle-btn { background: var(--green); color: #03102b; }
 
-.sidebar { display: grid; gap: 16px; }
+.sidebar { display: grid; gap: 16px; position: sticky; top: 16px; height: max-content; }
 .stats-card, .chart-card, .history-card {
   background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 14px;
 }
@@ -88,8 +115,13 @@ main {
 #historyTable th, #historyTable td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--border); }
 #historyTable thead th { color: var(--muted); font-weight: 700; }
 
-footer { padding: 16px 20px; color: var(--muted); border-top: 1px solid var(--border); }
+/* Make sure chart never forces overflow */
+.chart-card canvas { width: 100% !important; height: auto; display: block; }
 
-@media (max-width: 900px) {
-  main { grid-template-columns: 1fr; }
+footer.container { padding: 16px 16px 24px; color: var(--muted); border-top: 1px solid var(--border); margin-top: 8px; }
+
+/* Stack on small screens */
+@media (max-width: 980px) {
+  main.container { grid-template-columns: 1fr; }
+  .sidebar { position: static; }
 }
